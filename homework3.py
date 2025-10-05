@@ -56,12 +56,12 @@ class Homework3:
         m2, u2 = utils.conjugate_gradient_descent(model4a_objective, model4a_gradient, self.u2, self.g2, self.a2, beta_n=1, alpha_init=1, r=0.5, c=0.5, n_reset=20)
 
         print(f"Close to expected?\n"
-              "-- Rosenbrock Function: --\n"
-              f"Objective function: {np.allclose(m1, m1_expected)}\n"
-              f"Parameters: {np.allclose(u1, u1_expected)}\n"
-              "-- Model 4a: --\n"
-              f"Objective function: {np.allclose(m2, m2_expected, rtol=0, atol=1e-4)}\n"
-              f"Parameters: {np.allclose(u2, u2_expected, rtol=0, atol=1e-4)}\n")
+                "-- Rosenbrock Function: --\n"
+                f"Objective function: {np.allclose(m1, m1_expected)}\n"
+                f"Parameters: {np.allclose(u1, u1_expected)}\n"
+                "-- Model 4a: --\n"
+                f"Objective function: {np.allclose(m2, m2_expected, rtol=0, atol=1e-4)}\n"
+                f"Parameters: {np.allclose(u2, u2_expected, rtol=0, atol=1e-4)}\n")
 
 def main():
     homework = Homework3()

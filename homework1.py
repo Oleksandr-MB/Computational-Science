@@ -55,12 +55,12 @@ class Homework1:
         f2 = utils.calculate(model4a_gradient, self.u2, self.g2, self.a2)
 
         print(f"Close to expected?\n"
-              "-- Rosenbrock Function: --\n"
-              f"Objective function: {np.allclose(m1, m1_expected, rtol=0, atol=1e-4)}\n"
-              f"Gradient: {np.allclose(f1, f1_expected, rtol=0, atol=1e-4)}\n"
-              "-- Model 4a: --\n"
-              f"Objective function: {np.allclose(m2, m2_expected, rtol=0, atol=1e-4)}\n"
-              f"Gradient: {np.allclose(f2, f2_expected, rtol=0, atol=1e-4)}\n")
+                "-- Rosenbrock Function: --\n"
+                f"Objective function: {np.allclose(m1, m1_expected, rtol=0, atol=1e-4)}\n"
+                f"Gradient: {np.allclose(f1, f1_expected, rtol=0, atol=1e-4)}\n"
+                "-- Model 4a: --\n"
+                f"Objective function: {np.allclose(m2, m2_expected, rtol=0, atol=1e-4)}\n"
+                f"Gradient: {np.allclose(f2, f2_expected, rtol=0, atol=1e-4)}\n")
 
 def main():
     homework = Homework1()
