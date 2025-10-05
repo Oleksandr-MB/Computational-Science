@@ -57,8 +57,8 @@ class Homework3:
 
         print(f"Close to expected?\n"
               "-- Rosenbrock Function: --\n"
-              f"Objective function: {np.allclose(m1, m1_expected, rtol=0, atol=1e-4)}\n"
-              f"Parameters: {np.allclose(u1, u1_expected, rtol=0, atol=1e-4)}\n"
+              f"Objective function: {np.allclose(m1, m1_expected)}\n"
+              f"Parameters: {np.allclose(u1, u1_expected)}\n"
               "-- Model 4a: --\n"
               f"Objective function: {np.allclose(m2, m2_expected, rtol=0, atol=1e-4)}\n"
               f"Parameters: {np.allclose(u2, u2_expected, rtol=0, atol=1e-4)}\n")
