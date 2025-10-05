@@ -50,10 +50,10 @@ class Homework3:
             0.4031, -0.0557, 0.5233, -0.1183, 0.7062, -0.2429, 0.9915, -0.5251
         ])
 
-        m1, u1 = utils.conjugate_gradient_descent(rosenbrock_objective, rosenbrock_gradient, self.u1, beta_n=1, round=4, alpha_init=1, r=0.5, c=0.5, n_reset=20)
+        m1, u1 = utils.conjugate_gradient_descent(rosenbrock_objective, rosenbrock_gradient, self.u1, beta_n=1, alpha_init=1, r=0.5, c=0.5, n_reset=20)
 
         # beta_n = 1 (eq. 4.6), 2 (eq. 4.7), 3 (eq. 4.8), or 4 (eq. 4.9)
-        m2, u2 = utils.conjugate_gradient_descent(model4a_objective, model4a_gradient, self.u2, self.g2, self.a2, beta_n=1, round=4, alpha_init=1, r=0.5, c=0.5, n_reset=20)
+        m2, u2 = utils.conjugate_gradient_descent(model4a_objective, model4a_gradient, self.u2, self.g2, self.a2, beta_n=1, alpha_init=1, r=0.5, c=0.5, n_reset=20)
 
         print(f"Close to expected?\n"
               "-- Rosenbrock Function: --\n"
