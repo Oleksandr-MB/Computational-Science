@@ -50,11 +50,11 @@ class Homework2:
             0.4031, -0.0557, 0.5233, -0.1183, 0.7062, -0.2429, 0.9915, -0.5251
         ])
 
-        m1_vanilla, u1_vanilla = utils.gradient_descent(rosenbrock_objective, rosenbrock_gradient, self.u1, round=4, alpha=0.1)
-        m1_armijo, u1_armijo = utils.gradient_descent_armijo(rosenbrock_objective, rosenbrock_gradient, self.u1, round=4, alpha_init=1, r=0.5, c=0.5)
+        m1_vanilla, u1_vanilla = utils.gradient_descent(rosenbrock_objective, rosenbrock_gradient, self.u1, alpha=0.01)
+        m1_armijo, u1_armijo = utils.gradient_descent_armijo(rosenbrock_objective, rosenbrock_gradient, self.u1, alpha_init=1, r=0.5, c=0.5)
 
-        m2_vanilla, u2_vanilla = utils.gradient_descent(model4a_objective, model4a_gradient, self.u2, self.g2, self.a2, round=4, alpha=0.1)
-        m2_armijo, u2_armijo = utils.gradient_descent_armijo(model4a_objective, model4a_gradient, self.u2, self.g2, self.a2, round=4, alpha_init=1, r=0.5, c=0.5)
+        m2_vanilla, u2_vanilla = utils.gradient_descent(model4a_objective, model4a_gradient, self.u2, self.g2, self.a2, alpha=0.1)
+        m2_armijo, u2_armijo = utils.gradient_descent_armijo(model4a_objective, model4a_gradient, self.u2, self.g2, self.a2, alpha_init=1, r=0.5, c=0.5)
 
         print(f"Close to expected?\n"
                 "-- Rosenbrock Function: --\n"

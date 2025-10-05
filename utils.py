@@ -14,21 +14,15 @@ class Utils:
         with open(filename, "rb") as file:
             return dill.load(file)
         
-    def calculate(self, f, *args, round=None):
-        if len(args) == 1:
-            result = f(*args[0])
-        else:
-            result = f(*args)
-        if round is not None:
-            result = np.round(result, round)
-        return result
+    def calculate(self, f, *args):
+        return f(*args[0]) if len(args) == 1 else f(*args)
 
 
     def gradient(self, f, *args):
         return sym.derive_by_array(f, *args)
 
-    def gradient_descent(self, m, f, *args, alpha=0.1, round=None):
-        u, consts = args[0], args[1:]
+    def gradient_descent(self, m, f, *args, alpha=0.1):
+        u, consts = args[0].copy(), args[1:]
         
         m_new = self.calculate(m, *args)
         m_old = float('inf')
@@ -42,15 +36,11 @@ class Utils:
             m_new = self.calculate(m, u, *consts)
         
         u = u - alpha * h
-
-        if round is not None:
-            m_old = np.round(m_old, round)
-            u = np.round(u, round)
   
         return m_old, u
     
-    def gradient_descent_armijo(self, m, f, *args, alpha_init=1, r=0.5, c=0.5, round=None):
-        u, consts = args[0], args[1:]
+    def gradient_descent_armijo(self, m, f, *args, alpha_init=1, r=0.5, c=0.5):
+        u, consts = args[0].copy(), args[1:]
         m_new = self.calculate(m, *args)
         m_old = float('inf')
         alpha = alpha_init
@@ -72,21 +62,17 @@ class Utils:
             u = arg1_x
 
         u = u - alpha * h
-
-        if round is not None:
-            m_old = np.round(m_old, round)
-            u = np.round(u, round)
         
         return m_old, u
 
-    def conjugate_gradient_descent(self, m, f, *args, beta_n=1, alpha_init=1, r=0.5, c=0.5, n_reset=20, round=None):
+    def conjugate_gradient_descent(self, m, f, *args, beta_n=1, alpha_init=1, r=0.5, c=0.5, n_reset=20):
         epsilon = 1e-12 # To avoid division by zero
         beta1 = lambda f_new, f_old: f_new.dot(f_new) / max(f_old.dot(f_old), epsilon) # 4.6
         beta2 = lambda f_new, f_old: f_new.dot(f_new - f_old) / max(f_old.dot(f_old), epsilon) # 4.7
         beta3 = lambda f_new, f_old, h_old: f_new.dot(f_new - f_old) / max(h_old.dot(f_new - f_old), epsilon) # 4.8
         beta4 = lambda f_new, f_old, h_old: f_new.dot(f_new) / max(h_old.dot(f_new - f_old), epsilon) # 4.9
 
-        u, consts = args[0], args[1:]
+        u, consts = args[0].copy(), args[1:]
 
         count = 0
         m_new = self.calculate(m, *args)
@@ -104,17 +90,16 @@ class Utils:
             if count % n_reset == 0:
                 h_new = -f_new
             else:
-                match beta_n:
-                    case 1:
-                        beta = beta1(f_new, f_old)
-                    case 2:
-                        beta = beta2(f_new, f_old)
-                    case 3:
-                        beta = beta3(f_new, f_old, h_old)
-                    case 4:
-                        beta = beta4(f_new, f_old, h_old)
-                    case _:
-                        raise ValueError("Invalid beta_n value. Choose from {1, 2, 3, 4}.")
+                if beta_n == 1:
+                    beta = beta1(f_new, f_old)
+                elif beta_n == 2:
+                    beta = beta2(f_new, f_old)
+                elif beta_n == 3:
+                    beta = beta3(f_new, f_old, h_old)
+                elif beta_n == 4:
+                    beta = beta4(f_new, f_old, h_old)
+                else:
+                    raise ValueError("Invalid beta_n value. Choose from {1, 2, 3, 4}.")
 
                 h_new = -f_new + max(0, beta) * h_old
             
@@ -131,9 +116,5 @@ class Utils:
             count += 1
 
         u = u - alpha * h_new
-
-        if round is not None:
-            m_old = np.round(m_old, round)
-            u = np.round(u, round)
         
         return m_old, u

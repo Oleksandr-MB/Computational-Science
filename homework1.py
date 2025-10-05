@@ -36,8 +36,8 @@ class Homework1:
         m1_expected = 3.2516
         f1_expected = np.array([0.6250, 2.7500])
 
-        m1 = utils.calculate(rosenbrock_objective, self.u1, round=4)
-        f1 = utils.calculate(rosenbrock_gradient, self.u1, round=4)
+        m1 = utils.calculate(rosenbrock_objective, self.u1)
+        f1 = utils.calculate(rosenbrock_gradient, self.u1)
 
         m2_expected = 37.9826
         f2_expected = np.array([
@@ -51,16 +51,16 @@ class Homework1:
             0.9007,  -0.5076, 0.6174,  -0.8126, 2.2608,  0.2671,  -3.1128, 0.9078,  -0.2301, 0.4531
         ])
 
-        m2 = utils.calculate(model4a_objective, self.u2, self.g2, self.a2, round=4)
-        f2 = utils.calculate(model4a_gradient, self.u2, self.g2, self.a2, round=4)
+        m2 = utils.calculate(model4a_objective, self.u2, self.g2, self.a2)
+        f2 = utils.calculate(model4a_gradient, self.u2, self.g2, self.a2)
 
         print(f"Close to expected?\n"
               "-- Rosenbrock Function: --\n"
-              f"Objective function: {np.allclose(m1, m1_expected)}\n"
-              f"Gradient: {np.allclose(f1, f1_expected)}\n"
+              f"Objective function: {np.allclose(m1, m1_expected, rtol=0, atol=1e-4)}\n"
+              f"Gradient: {np.allclose(f1, f1_expected, rtol=0, atol=1e-4)}\n"
               "-- Model 4a: --\n"
-              f"Objective function: {np.allclose(m2, m2_expected)}\n"
-              f"Gradient: {np.allclose(f2, f2_expected)}")
+              f"Objective function: {np.allclose(m2, m2_expected, rtol=0, atol=1e-4)}\n"
+              f"Gradient: {np.allclose(f2, f2_expected, rtol=0, atol=1e-4)}\n")
 
 def main():
     homework = Homework1()
